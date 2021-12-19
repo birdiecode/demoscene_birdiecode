@@ -8,4 +8,4 @@
 gcc main.c -o birdiecode
 ```
 
-## Размер - 16464 B
+## Размер - 16696 B
