@@ -10,4 +10,4 @@
 gcc -nostartfiles -nodefaultlibs -nostdlib -static main.c -o birdiecode
 ```
 
-## Размер - 9600 B
+## Размер - 13680 B
