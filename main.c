@@ -19,15 +19,19 @@ void strcc(char s, char n)
 	
 }
 
-char a[1][3][2] = {
+char a[2][3][2] = {
 	{{0, 4},
 	 {15, 19},
 	 {35, 39}},
+	{{5, 10},
+	 {19, 24},
+	 {35, 40}},
+
 };
 
 void _start()
 {
-	int ind = 0;
+	int ind = 1;
 
 	strcc(a[ind][0][0], a[ind][0][1]);
 	strcc(a[ind][1][0], a[ind][1][1]);
