@@ -1,48 +1,42 @@
-#include <stdio.h>
-#include <unistd.h>
-
-#define BC "birdiecode\n"
-#define F0 "<`)  \n (//\n  1\n"
-#define F1 "   //\n(`>/\n  1\n"
-#define F2 "   //\n (`>\n  1\n"
-#define F3 "<`)//\n (/ \n  1\n"
-#define F4 "<`)  \n (\\\\\n  \\\n"
-#define F5 "<`)//\n (/ \n  \"\n"
-#define F6 "<`)  \n (\\\\\n  \"\n"
+#define SPRITE "<`)     //<`)// (//(`>/ (`> (/  (\\\\  1  \\  \"birdiecode\n"
+long re;
 
 
-int main (int argc, char ** argv)
+struct timespec {
+	long tv_sec;        /* seconds */
+	long tv_nsec;       /* nanoseconds */
+};
+
+void _start() __asm__("_start");
+
+void strcc(char s, char n)
 {
-	printf("%s%s", F0, BC);  // frame 0
-	sleep (1);
-	printf("\033[4A%s%s", F1, BC); // frame 1
-	sleep (1);
-	printf("\033[4A%s%s", F2, BC); // frame 2
-	sleep (1);
-	printf("\033[4A%s%s", F1, BC); // frame 1
-	sleep (1);
-	printf("\033[4A%s%s", F2, BC); // frame 2
-	sleep (1);
-	printf("\033[4A%s%s", F1, BC); // frame 1
-	sleep (1);
-	printf("\033[4A%s%s", F0, BC);  // frame 0
-	sleep (1);
-	printf("\033[4A%s%s", F3, BC);  // frame 3
-	sleep (1);
-	printf("\033[4A%s%s", F4, BC);  // frame 4
-	sleep (1);
-	printf("\033[4A%s%s", F5, BC);  // frame 5
-	sleep (1);
-	printf("\033[4A%s%s", F6, BC);  // frame 6
-	sleep (1);
-	printf("\033[4A%s%s", F5, BC);  // frame 5
-	sleep (1);
-	printf("\033[4A%s%s", F6, BC);  // frame 6
-	sleep (1);
-	printf("\033[4A%s%s", F5, BC);  // frame 5
-	sleep (1);
-	printf("\033[4A%s%s", F6, BC);  // frame 6
-	sleep (1);
-	printf("\033[4A%s%s", F0, BC);  // frame 0
-	return 0;
+	for (; s < n; ++s)
+	{
+		__asm__ volatile ("int $0x80": "=a"(re): "0"(4), "b"(1), "c"((long)&SPRITE[s]), "d"((long)(1))); //write(1, &SPRITE[s], 1);
+	}
+
+	__asm__ volatile ("int $0x80": "=a"(re): "0"(4), "b"(1), "c"((long)&SPRITE[54]), "d"((long)(1)));
+}
+
+void _start()
+{
+	struct timespec T;
+	T.tv_sec = 1;
+	T.tv_nsec = 1000000;
+
+	strcc(0, 4);
+	strcc(15,19);
+	strcc(35,39);
+	strcc(44,54);
+
+	// sleep 
+	//asm("movl eax, 162");
+	//asm("movl ebx, T");
+	//asm("movl ecx, 0");
+	//asm("int $0x80");
+	// or
+	//__asm__ volatile ("int $0x80": "=a"(re): "0"(162), "b"((long)&T), "c"(0));
+
+	__asm__ volatile ("int $0x80": "=a"(re): "0"(1),"b" (0));
 }

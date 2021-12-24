@@ -2,10 +2,12 @@
 
 Это маленькая ASCII art анимация созданная для изучения уменьшения размера исполняемого файла.
 
+> пока не анимация
+
 ## Компиляция
 
 ```shell
-gcc main.c -o birdiecode
+gcc -nostartfiles -nodefaultlibs -nostdlib -static main.c -o birdiecode
 ```
 
-## Размер - 16744 B
+## Размер - 9600 B
