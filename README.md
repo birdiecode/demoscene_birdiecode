@@ -5,7 +5,7 @@
 ## Компиляция
 
 ```shell
-gcc -nostartfiles -nodefaultlibs -nostdlib -static main.c -o birdiecode
+gcc -nostartfiles -nodefaultlibs -Os -s -fno-stack-protector -nostdlib -static main.c -o birdiecode
 ```
 
-## Размер - 13816 B
+## Размер - 13160 B
