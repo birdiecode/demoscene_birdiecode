@@ -4,6 +4,10 @@ section .data
   ;        |    0     |     3    |    6     |   9      |   12     |    15    |   18
   frame db 0,3,6,3,6,3,0,9,12,15,18,15,18,15,18,0
   birdiecode db "birdiecode", 10
+  ; задержка
+  timespec:
+        dq 0                ; секунды
+        dq 250000000         ; наносекунды
 
 section .text
   global _start
@@ -55,7 +59,11 @@ print_loop:
   mov rsi, birdiecode
   syscall
 
-  ; TODO: Реализовать задержку на 250 миллисекунд.
+  ; Вызов nanosleep
+  mov rax, 35
+  lea rdi, [timespec]
+  xor rsi, rsi
+  syscall
   ; TODO: Реализовать перемещение курсора на 3 строки вверх.
 
   mov rdx, r9
