@@ -8,4 +8,4 @@
 nasm -f elf64 -o birdiecode.o birdiecode.s && ld -o birdiecode birdiecode.o
 ```
 
-## Размер - Nan B
+## Размер - 9184 B

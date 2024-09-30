@@ -3,11 +3,12 @@ section .data
   frames db 0, 34, 21, 3, 26, 21, 3, 24, 21, 8, 30, 21, 0, 13, 38, 8, 30, 17, 0, 13, 17
   ;        |    0     |     3    |    6     |   9      |   12     |    15    |   18
   frame db 0,3,6,3,6,3,0,9,12,15,18,15,18,15,18,0
-  birdiecode db "birdiecode", 10
+  birdiecode db "birdiecode", 10, 10, 10
   ; задержка
   timespec:
         dq 0                ; секунды
         dq 250000000         ; наносекунды
+  move_cursor db 0x1b, '[4A', 0
 
 section .text
   global _start
@@ -64,12 +65,27 @@ print_loop:
   lea rdi, [timespec]
   xor rsi, rsi
   syscall
-  ; TODO: Реализовать перемещение курсора на 3 строки вверх.
+
+  ; Перевод коредки на 4 строки вверх
+  mov rax, 1
+  mov rdi, 1
+  mov rsi, move_cursor
+  mov rdx, 6
+  syscall
 
   mov rdx, r9
   dec rdx
   mov r9, rdx
   jnz animation_loop
+
+  ; Опускаю коретку на 3 строки вниз
+  mov rax, 1
+  mov rdi, 1
+  mov rdx, 3
+  mov rsi, birdiecode
+  add rsi, 10
+  syscall
+
 
   mov rax, 60
   xor rdi, rdi
