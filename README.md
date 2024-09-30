@@ -5,7 +5,7 @@
 ## Компиляция
 
 ```shell
-gcc -nostartfiles -nodefaultlibs -Os -s -fno-stack-protector -nostdlib -static main.c -o birdiecode
+nasm -f elf64 -o birdiecode.o birdiecode.s && ld -o birdiecode birdiecode.o
 ```
 
-## Размер - 13160 B
+## Размер - Nan B
