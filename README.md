@@ -5,7 +5,7 @@
 ## Компиляция
 
 ```shell
-nasm -f elf64 -o birdiecode.o birdiecode.s && ld -o birdiecode birdiecode.o
+nasm -f elf64 -o birdiecode.o birdiecode.s && ld -o birdiecode birdiecode.o --strip-all
 ```
 
-## Размер - 9184 B
+## Размер - 8584 B
